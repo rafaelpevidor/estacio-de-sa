@@ -10,11 +10,26 @@ package br.com.estacio.verifyid.model.enums;
  * @author rafaelpevidor
  */
 public enum ActionEnum {
-    SAVE, UPDATE, DELETE, LIST, EDIT;
+    ADD_CUSTOMER("/customer/add"),
+    DELETE_CUSTOMER("/customer/remove"),
+    EDIT_CUSTOMER("/customer/edit"),
+    LIST_CUSTOMERS("/customer"),
+    UPDATE_CUSTOMER("/customer/update")
+    ;
+    
+    private String path;
 
-    public static ActionEnum findById(Integer id) {
+    private ActionEnum(String path) {
+        this.path = path;
+    }
+
+    public String getPath() {
+        return path;
+    }
+    
+    public static ActionEnum findByPath(String path) {
         for (ActionEnum action : ActionEnum.values()) {
-            if (action.ordinal() == id)
+            if (action.getPath().equalsIgnoreCase(path))
                 return action;
         }
         return null;

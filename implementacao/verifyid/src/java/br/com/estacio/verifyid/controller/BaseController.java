@@ -5,10 +5,22 @@
  */
 package br.com.estacio.verifyid.controller;
 
+import br.com.estacio.verifyid.model.actions.AddCustomerAction;
+import br.com.estacio.verifyid.model.actions.BaseAction;
+import br.com.estacio.verifyid.model.actions.DeleteCustomerAction;
+import br.com.estacio.verifyid.model.actions.EditCustomerAction;
+import br.com.estacio.verifyid.model.actions.ListCustomersAction;
+import br.com.estacio.verifyid.model.actions.UpdateCustomerAction;
+import br.com.estacio.verifyid.model.dao.CustomerDAO;
 import br.com.estacio.verifyid.model.enums.ActionEnum;
+import br.com.estacio.verifyid.model.service.CustomerService;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  *
@@ -16,17 +28,24 @@ import javax.servlet.http.HttpServlet;
  */
 public abstract class BaseController extends HttpServlet {
     
-    private Map<Integer, ActionEnum> actions;
+    protected static final String HOME_PAGE = "/WEB-INF/view/home.jsp";
+    
+    private Map<String, BaseAction> actions;
 
-    public Map<Integer, ActionEnum> getActions() {
+    //TODO: adicionar ao mapa as ações que forem sendo criadas
+    protected Map<String, BaseAction> getActions() {
         if (null == actions) {
             actions = new HashMap<>();
-            actions.put(ActionEnum.SAVE.ordinal(), ActionEnum.SAVE);
-            actions.put(ActionEnum.DELETE.ordinal(), ActionEnum.DELETE);
-            actions.put(ActionEnum.EDIT.ordinal(), ActionEnum.EDIT);
-            actions.put(ActionEnum.UPDATE.ordinal(), ActionEnum.UPDATE);
-            actions.put(ActionEnum.LIST.ordinal(), ActionEnum.LIST);
+            actions.put(ActionEnum.ADD_CUSTOMER.getPath(), new AddCustomerAction(new CustomerService(new CustomerDAO())));
+            actions.put(ActionEnum.DELETE_CUSTOMER.getPath(), new DeleteCustomerAction((new CustomerService(new CustomerDAO()))));
+            actions.put(ActionEnum.EDIT_CUSTOMER.getPath(), new EditCustomerAction((new CustomerService(new CustomerDAO()))));
+            actions.put(ActionEnum.LIST_CUSTOMERS.getPath(), new ListCustomersAction((new CustomerService(new CustomerDAO()))));
+            actions.put(ActionEnum.UPDATE_CUSTOMER.getPath(), new UpdateCustomerAction((new CustomerService(new CustomerDAO()))));
         }
         return actions;
-    }   
+    }
+    
+    public void forward(String page, HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher(page).forward(request, response);
+    }
 }

@@ -7,10 +7,8 @@ package br.com.estacio.verifyid.controller;
 
 import br.com.estacio.verifyid.model.enums.ActionEnum;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -18,37 +16,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rafaelpevidor
  */
-@WebServlet(name = "CustomerController", urlPatterns = {"/customer"})
+@WebServlet(name = "CustomerController", urlPatterns = {"/customer", "/customer/add", "/customer/edit", "/customer/remove", "/customer/update"})
 public class CustomerController extends BaseController {
-
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        
-        String actionStr = (String) request.getAttribute("action");
-        ActionEnum action = ActionEnum.findById(Integer.valueOf(actionStr));
-        switch (action) {
-            case DELETE:
-                    break;
-            case EDIT:
-                    break;
-            case LIST:
-                    break;
-            case SAVE:
-                    break;
-            case UPDATE:
-                    break;
-                    
-        }
-    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -62,10 +31,25 @@ public class CustomerController extends BaseController {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String userPath = request.getServletPath();
+        ActionEnum actionToExecute = ActionEnum.findByPath(userPath);
+        
+        if (!(
+                (actionToExecute.equals(ActionEnum.EDIT_CUSTOMER))||
+                (actionToExecute.equals(ActionEnum.LIST_CUSTOMERS))
+        )) {
+            throw new ServletException("Ação inválida!");
+        }
+        
+        try {
+            String page = getActions().get(userPath).processRequest(request, response);
+            forward(page, request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
-    /**
+        /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -76,7 +60,22 @@ public class CustomerController extends BaseController {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       String userPath = request.getServletPath();
+       ActionEnum actionToExecute = ActionEnum.findByPath(userPath);
+       
+       if (
+                (actionToExecute.equals(ActionEnum.EDIT_CUSTOMER))||
+                (actionToExecute.equals(ActionEnum.LIST_CUSTOMERS))
+        ) {
+            throw new ServletException("Ação inválida!");
+        }
+       
+       try {
+            String page = getActions().get(userPath).processRequest(request, response);
+            forward(page, request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 
     /**

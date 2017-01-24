@@ -6,7 +6,7 @@
 package br.com.estacio.verifyid.model.dao;
 
 import java.util.List;
-import br.com.estacio.verifyid.model.BaseEntity;
+import br.com.estacio.verifyid.model.domain.BaseEntity;
 
 /**
  *

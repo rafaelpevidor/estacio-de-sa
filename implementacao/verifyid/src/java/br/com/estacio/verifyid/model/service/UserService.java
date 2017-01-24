@@ -13,46 +13,44 @@ import java.util.List;
  *
  * @author rafaelpevidor
  */
-public class UserService implements BaseService<User> {
+public class UserService extends AbstractService<User> implements BaseService {
+
+    public UserService(UserDAO repository) {
+        super(repository);
+    }
     
-    @Deprecated
-    public UserService() {
-        this.dao = new UserDAO();
-    }
-
-    public UserService(UserDAO dao) {
-        this.dao = dao;
-    }
-      
-    private UserDAO dao;
-
     @Override
     public User add(User entidade) {
-        return dao.add(entidade);
+        return repository.add(entidade);
     }
 
     @Override
     public User update(User entidade) {
-        return dao.update(entidade);
+        return repository.update(entidade);
     }
 
     @Override
     public User get(User entidade) {
-        return dao.get(entidade);
+        return repository.get(entidade);
     }
 
     @Override
     public void remove(Integer entidadeId) {
-        dao.remove(entidadeId);
+        repository.remove(entidadeId);
     }
 
     @Override
     public List<User> getAll() {
-        return dao.getAll();
+        return repository.getAll();
     }
     
     
     public User findByLoginAndPassword(String login, String password) {
-        return dao.findByLoginAndPassword(login, password);
+        return ((UserDAO)repository).findByLoginAndPassword(login, password);
+    }
+
+    @Override
+    public User get(Integer entidadeId) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

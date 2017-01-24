@@ -5,8 +5,6 @@
  */
 package br.com.estacio.verifyid.model.domain;
 
-import br.com.estacio.verifyid.model.BaseEntity;
-
 /**
  *
  * @author rafaelpevidor

@@ -5,10 +5,9 @@
  */
 package br.com.estacio.verifyid.controller;
 
-import br.com.estacio.verifyid.model.dao.UserDAO;
-import br.com.estacio.verifyid.model.domain.User;
-import br.com.estacio.verifyid.model.service.UserService;
+import br.com.estacio.verifyid.model.enums.PageEnum;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,8 +18,22 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rafaelpevidor
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+@WebServlet(name = "HomeController", urlPatterns = {"/home"})
+public class HomeController extends HttpServlet {
+
+    /**
+     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
+     * methods.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        request.getRequestDispatcher(PageEnum.HOME.getUrl());
+    }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,7 +47,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        processRequest(request, response);
     }
 
     /**
@@ -48,18 +61,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        
-        UserService service = new UserService(new UserDAO());
-        User user = service.findByLoginAndPassword(login, password);
-        
-        if (null == user) {
-          request.setAttribute("msg", "Não foi possível efetuar o login. Verifique usuário e senha.");
-          request.getRequestDispatcher("login.jsp").forward(request, response);  
-        } else
-            response.sendRedirect(request.getContextPath()+"/view/home.jsp");
+        processRequest(request, response);
     }
 
     /**
