@@ -5,13 +5,15 @@
  */
 package br.com.estacio.verifyid.controller;
 
-import br.com.estacio.verifyid.model.dao.UserDAO;
+import br.com.estacio.verifyid.model.actions.LoginAction;
 import br.com.estacio.verifyid.model.domain.User;
-import br.com.estacio.verifyid.model.service.UserService;
+import br.com.estacio.verifyid.model.enums.ActionEnum;
+import br.com.estacio.verifyid.model.enums.PageEnum;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author rafaelpevidor
  */
 @WebServlet(name = "LoginController", urlPatterns = {"/login"})
-public class LoginController extends HttpServlet {
+public class LoginController extends BaseController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -34,7 +36,17 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        User user = null;
         
+        if (null != (user = (User) request.getSession(true).getAttribute("user"))) {
+            try {
+                redirect(ActionEnum.HOME.getPath(request.getContextPath()), request, response);
+                return;
+            } catch (IOException ex) {
+                Logger.getLogger(LoginAction.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        redirect(PageEnum.LOGIN.getJsp(request.getContextPath()), request, response);
     }
 
     /**
@@ -46,20 +58,14 @@ public class LoginController extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
+    @SuppressWarnings("UnusedAssignment")
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String userPath = request.getServletPath();
+        String page = getAction(userPath).processRequest(request, response);
         
-        String login = request.getParameter("login");
-        String password = request.getParameter("password");
-        
-        UserService service = new UserService(new UserDAO());
-        User user = service.findByLoginAndPassword(login, password);
-        
-        if (null == user) {
-          request.setAttribute("msg", "Não foi possível efetuar o login. Verifique usuário e senha.");
-          request.getRequestDispatcher("login.jsp").forward(request, response);  
-        } else
-            response.sendRedirect(request.getContextPath()+"/view/home.jsp");
+        if (null != page)
+            redirect(page, request, response);
     }
 
     /**

@@ -42,7 +42,7 @@ public class CustomerController extends BaseController {
         }
         
         try {
-            String page = getActions().get(userPath).processRequest(request, response);
+            String page = getAction(userPath).processRequest(request, response);
             forward(page, request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -71,7 +71,7 @@ public class CustomerController extends BaseController {
         }
        
        try {
-            String page = getActions().get(userPath).processRequest(request, response);
+            String page = getAction(userPath).processRequest(request, response);
             forward(page, request, response);
         } catch (Exception ex) {
             ex.printStackTrace();

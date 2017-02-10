@@ -15,6 +15,10 @@ import java.util.List;
  */
 public class UserService extends AbstractService<User> implements BaseService {
 
+    public UserService() {
+        this.repository = new UserDAO();
+    }
+    
     public UserService(UserDAO repository) {
         super(repository);
     }

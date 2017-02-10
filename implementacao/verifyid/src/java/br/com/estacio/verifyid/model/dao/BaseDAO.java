@@ -6,11 +6,12 @@
 package br.com.estacio.verifyid.model.dao;
 
 import java.util.List;
-import br.com.estacio.verifyid.model.domain.BaseEntity;
+import br.com.estacio.verifyid.model.BaseEntity;
 
 /**
  *
  * @author rafaelpevidor
+ * @param <E>
  */
 public interface BaseDAO <E extends BaseEntity> {
     

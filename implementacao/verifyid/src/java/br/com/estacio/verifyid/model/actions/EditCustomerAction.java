@@ -5,7 +5,7 @@
  */
 package br.com.estacio.verifyid.model.actions;
 
-import br.com.estacio.verifyid.model.domain.BaseEntity;
+import br.com.estacio.verifyid.model.dao.CustomerDAO;
 import br.com.estacio.verifyid.model.domain.Customer;
 import br.com.estacio.verifyid.model.enums.PageEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
@@ -32,7 +32,7 @@ public class EditCustomerAction extends AbstractAction<Customer> implements Base
             return PageEnum.CUSTOMER_FORM.getUrl();
         } catch (Exception e) {
             addMessage(request, "Desculpe, houve um erro ao tentar recuperar o cliente.");
-            return PageEnum.CUSTOMERS_LIST.getUrl();
+            return new ListCustomersAction(new CustomerService(new CustomerDAO())).processRequest(request, response);
         }
     }
 

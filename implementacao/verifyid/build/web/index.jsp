@@ -13,7 +13,8 @@
     </head>
     <body>
         <% 
-            response.sendRedirect("login.jsp"); 
+            System.out.println(request.getContextPath());
+            response.sendRedirect(request.getContextPath()+"/login"); 
         %>
     </body>
 </html>

@@ -5,7 +5,9 @@
  */
 package br.com.estacio.verifyid.model.actions;
 
+import br.com.estacio.verifyid.model.dao.CustomerDAO;
 import br.com.estacio.verifyid.model.domain.Customer;
+import br.com.estacio.verifyid.model.enums.PageEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,9 +26,16 @@ public class UpdateCustomerAction extends AbstractAction<Customer> implements Ba
     
     @Override
     public String processRequest(HttpServletRequest request, HttpServletResponse response) {
-        entity = bind(request);
-        service.update(entity);
-        return "";
+        
+        try {
+            entity = bind(request);
+            service.update(entity);
+            return new ListCustomersAction(new CustomerService(new CustomerDAO())).processRequest(request, response);
+        } catch (Exception e) {
+            e.printStackTrace();
+            addMessage(request, "Desculpe, houve um erro ao atualizar o cliente.");
+            return PageEnum.CUSTOMER_FORM.getUrl();
+        }
     }
 
     @Override

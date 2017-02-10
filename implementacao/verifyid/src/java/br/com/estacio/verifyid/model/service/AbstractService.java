@@ -6,7 +6,7 @@
 package br.com.estacio.verifyid.model.service;
 
 import br.com.estacio.verifyid.model.dao.BaseDAO;
-import br.com.estacio.verifyid.model.domain.BaseEntity;
+import br.com.estacio.verifyid.model.BaseEntity;
 import java.util.List;
 
 /**
@@ -16,7 +16,6 @@ import java.util.List;
  */
 public abstract class AbstractService <E extends BaseEntity> {
 
-    @Deprecated
     public AbstractService() {}
     
     public AbstractService(BaseDAO<E> repository) {

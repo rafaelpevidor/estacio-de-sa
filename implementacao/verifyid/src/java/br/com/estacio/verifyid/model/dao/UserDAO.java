@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public class UserDAO implements BaseDAO<User> {
     
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<Integer, User> records = new HashMap<>();
 
     public UserDAO() {

@@ -43,8 +43,11 @@ public class AuthFilter implements Filter {
         
         HttpServletRequest httpRequest = (HttpServletRequest)request;
         HttpServletResponse httpResponse = (HttpServletResponse)response;
-        if (null == httpRequest.getSession().getAttribute("user"))
-            httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.jsp");
+        if (null == httpRequest.getSession().getAttribute("user")) {
+            httpRequest.setAttribute("msg", "Atenção! Usuário não autenticado.");
+            httpRequest.getRequestDispatcher("login.jsp").forward(request, response);   
+        }
+            
         // Write code here to process the request and/or response before
         // the rest of the filter chain is invoked.
         // For example, a logging filter might log items on the request object,

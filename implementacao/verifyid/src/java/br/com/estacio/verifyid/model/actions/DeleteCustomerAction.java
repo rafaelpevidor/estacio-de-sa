@@ -7,7 +7,6 @@ package br.com.estacio.verifyid.model.actions;
 
 import br.com.estacio.verifyid.model.dao.CustomerDAO;
 import br.com.estacio.verifyid.model.domain.Customer;
-import br.com.estacio.verifyid.model.enums.PageEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -28,6 +27,7 @@ public class DeleteCustomerAction extends AbstractAction<Customer> implements Ba
             service.remove(getId(request));
             addMessageDeleteWithSuccess(request);
         } catch (Exception e) {
+            e.printStackTrace();
             addMessage(request, "Desculpe, houve um erro ao tentar remover o cliente");
         }
         

@@ -5,7 +5,7 @@
  */
 package br.com.estacio.verifyid.model.actions;
 
-import br.com.estacio.verifyid.model.domain.BaseEntity;
+import br.com.estacio.verifyid.model.BaseEntity;
 import br.com.estacio.verifyid.model.service.AbstractService;
 import java.util.Collection;
 import javax.servlet.http.HttpServletRequest;
