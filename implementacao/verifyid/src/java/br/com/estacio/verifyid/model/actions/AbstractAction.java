@@ -64,7 +64,7 @@ public abstract class AbstractAction <E extends BaseEntity> {
      * @param entityCollection
      */
     public void addEntityCollection(final HttpServletRequest request, Collection<E> entityCollection) {
-        request.setAttribute("entityCollection", entityCollection);
+        request.setAttribute("records", entityCollection);
     }
     
     /**
@@ -73,6 +73,10 @@ public abstract class AbstractAction <E extends BaseEntity> {
      * @return
      */
     public Integer getId(final HttpServletRequest request) {
-        return Integer.valueOf(request.getParameter("id"));
+        String id = request.getParameter("id");
+        if (null != id && !id.isEmpty())
+            return Integer.valueOf(id);
+        else
+            return null;
     }
 }

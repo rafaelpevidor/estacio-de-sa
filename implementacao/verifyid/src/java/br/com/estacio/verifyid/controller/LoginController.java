@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rafaelpevidor
  */
-@WebServlet(name = "LoginController", urlPatterns = {"/login"})
+//@WebServlet(name = "LoginController", urlPatterns = {"/login"})
 public class LoginController extends BaseController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -45,8 +45,10 @@ public class LoginController extends BaseController {
             } catch (IOException ex) {
                 Logger.getLogger(LoginAction.class.getName()).log(Level.SEVERE, null, ex);
             }
+        } else {
+            redirect(PageEnum.LOGIN.getJsp(request.getContextPath()), request, response);
         }
-        redirect(PageEnum.LOGIN.getJsp(request.getContextPath()), request, response);
+        
     }
 
     /**

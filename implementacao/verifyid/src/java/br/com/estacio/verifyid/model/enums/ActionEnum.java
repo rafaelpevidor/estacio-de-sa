@@ -17,7 +17,14 @@ public enum ActionEnum {
     DELETE_CUSTOMER("/customer/remove"),
     EDIT_CUSTOMER("/customer/edit"),
     LIST_CUSTOMERS("/customer"),
-    UPDATE_CUSTOMER("/customer/update")
+    UPDATE_CUSTOMER("/customer/update"),
+    NEW_CUSTOMER("/customer/new"),
+    ADD_ORDER("/order/add"),
+    DELETE_ORDER("/order/remove"),
+    EDIT_ORDER("/order/edit"),
+    LIST_ORDERS("/order"),
+    UPDATE_ORDER("/order/update"),
+    NEW_ORDER("/order/new")
     ;
     
     private ActionEnum(String path) {

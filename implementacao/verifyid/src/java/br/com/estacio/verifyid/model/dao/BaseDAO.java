@@ -20,4 +20,5 @@ public interface BaseDAO <E extends BaseEntity> {
     public E get(E entidade);
     public void remove(Integer entidadeId);
     public List<E> getAll();
+    public E get(Integer entidadeId);
 }

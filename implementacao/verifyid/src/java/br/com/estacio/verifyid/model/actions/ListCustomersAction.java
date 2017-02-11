@@ -5,7 +5,6 @@
  */
 package br.com.estacio.verifyid.model.actions;
 
-import br.com.estacio.verifyid.model.BaseEntity;
 import br.com.estacio.verifyid.model.domain.Customer;
 import br.com.estacio.verifyid.model.enums.PageEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
@@ -27,10 +26,10 @@ public class ListCustomersAction extends AbstractAction<Customer> implements Bas
         
         try {
             addEntityCollection(request, service.getAll());
-            return PageEnum.CUSTOMERS_LIST.getUrl();
+            return PageEnum.CUSTOMERS_LIST.getJsp();
         } catch (Exception e) {
             addMessage(request, "Desculpe, houve um erro ao listar os clientes.");
-            return request.getContextPath()+"/home";
+            return PageEnum.HOME.getUrl();
         }
     }
 

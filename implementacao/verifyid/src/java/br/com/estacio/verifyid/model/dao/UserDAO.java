@@ -54,6 +54,11 @@ public class UserDAO implements BaseDAO<User> {
         out.addAll(records.values());
         return out;
     }
+
+    @Override
+    public User get(Integer entidadeId) {
+        return records.get(entidadeId);
+    }
     
     public User findByLoginAndPassword(String login, String password) {
         for (User user : records.values()) {

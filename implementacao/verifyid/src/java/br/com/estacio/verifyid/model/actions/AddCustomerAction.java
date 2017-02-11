@@ -29,7 +29,10 @@ public class AddCustomerAction extends AbstractAction<Customer> implements BaseA
        
         try {
             entidade = bind(request);
-            service.add(entidade);
+            if (null == entidade.getId())
+                service.add(entidade);
+            else
+                service.update(entidade);
             addMessageAddWithSuccess(request);
             return new ListCustomersAction(new CustomerService(new CustomerDAO())).processRequest(request, response);
         } catch (Exception e) {

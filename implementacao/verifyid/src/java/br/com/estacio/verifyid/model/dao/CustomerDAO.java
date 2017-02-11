@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public class CustomerDAO implements BaseDAO<Customer> {
     
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<Integer, Customer> records = new HashMap<>();
 
     @Override
@@ -39,7 +40,10 @@ public class CustomerDAO implements BaseDAO<Customer> {
 
     @Override
     public void remove(Integer entidadeId) {
-        records.remove(entidadeId);
+        if (!records.isEmpty() && records.size() > 1)
+            records.remove(entidadeId);
+        else
+            records = new HashMap<>();
     }
 
     @Override
@@ -48,5 +52,20 @@ public class CustomerDAO implements BaseDAO<Customer> {
         out.addAll(records.values());
         return out;
     }
-    
+
+    @Override
+    public Customer get(Integer entidadeId) {
+        return records.get(entidadeId);
+    }
+ 
+    private void populate() {
+        Customer customer = new Customer();
+        customer.setCnpj("26955865000/03");
+        customer.setEndereco("Rua Benjamim Rodrigues 300");
+        customer.setId(1);
+        customer.setNome("Coca-cola");
+        customer.setRazaoSocial("Coca-cola");
+        customer.setTelefone("2530-2530");
+        records.put(1, customer);
+    }
 }

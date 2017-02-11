@@ -5,7 +5,6 @@
  */
 package br.com.estacio.verifyid.model.actions;
 
-import br.com.estacio.verifyid.model.dao.CustomerDAO;
 import br.com.estacio.verifyid.model.domain.Customer;
 import br.com.estacio.verifyid.model.enums.PageEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
@@ -29,10 +28,10 @@ public class EditCustomerAction extends AbstractAction<Customer> implements Base
         try {
             entidade = service.get(getId(request));
             addEntity(request, entidade);
-            return PageEnum.CUSTOMER_FORM.getUrl();
+            return PageEnum.CUSTOMER_FORM.getJsp();
         } catch (Exception e) {
             addMessage(request, "Desculpe, houve um erro ao tentar recuperar o cliente.");
-            return new ListCustomersAction(new CustomerService(new CustomerDAO())).processRequest(request, response);
+            return PageEnum.CUSTOMERS_LIST.getUrl();
         }
     }
 

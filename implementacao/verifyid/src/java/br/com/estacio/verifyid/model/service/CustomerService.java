@@ -21,32 +21,32 @@ public class CustomerService extends AbstractService<Customer> implements BaseSe
     
     @Override
     public Customer add(Customer entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repository.add(entidade);
     }
 
     @Override
     public Customer update(Customer entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repository.update(entidade);
     }
 
     @Override
     public Customer get(Customer entidade) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repository.get(entidade.getId());
     }
 
     @Override
     public void remove(Integer entidadeId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        repository.remove(entidadeId);
     }
 
     @Override
     public List<Customer> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repository.getAll();
     }
 
     @Override
     public Customer get(Integer entidadeId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return repository.get(entidadeId);
     }
     
 }

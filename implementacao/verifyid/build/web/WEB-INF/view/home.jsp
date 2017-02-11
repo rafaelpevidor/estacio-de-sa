@@ -7,11 +7,17 @@
 
 
             <div id="indexLeftColumn">
-                left column
+                <span>MENU</span>
+                <ul>
+                    <li><a href="<%=request.getContextPath()%>/home">Home</a></li>
+                    <li><a href="<%=request.getContextPath()%>/customer">Cliente</a></li>
+                    <li><a href="<%=request.getContextPath()%>/order">Pedido</a></li>
+                    <li>Ordem</li>
+                </ul>
             </div>
 
             <div id="indexRightColumn">
-                right column
+                
             </div>
 
             

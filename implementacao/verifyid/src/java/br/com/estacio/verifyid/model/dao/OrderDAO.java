@@ -17,6 +17,7 @@ import java.util.Map;
  */
 public class OrderDAO implements BaseDAO<Order> {
 
+    @SuppressWarnings("FieldMayBeFinal")
     private Map<Integer, Order> records = new HashMap<>();
 
     @Override
@@ -47,6 +48,11 @@ public class OrderDAO implements BaseDAO<Order> {
         List<Order> out = new ArrayList<>();
         out.addAll(records.values());
         return out;
+    }
+
+    @Override
+    public Order get(Integer entidadeId) {
+        return records.get(entidadeId);
     }
     
 }

@@ -14,8 +14,8 @@ public enum PageEnum {
     HOME("/home", "/WEB-INF/view/home.jsp"),
     CUSTOMERS_LIST("/customer", "/WEB-INF/view/customer/list.jsp"),
     CUSTOMER_FORM("/customer/form", "/WEB-INF/view/customer/form.jsp"),
-    ORDER_LIST("", "/WEB-INF/view/order/list.jsp"),
-    ORDER_FORM("", "/WEB-INF/view/order/form.jsp"),
+    ORDERS_LIST("/order/list", "/WEB-INF/view/order/list.jsp"),
+    ORDER_FORM("/order/form", "/WEB-INF/view/order/form.jsp"),
     PRODUCTION_ORDER_LIST("", "/WEB-INF/view/production-order/list.jsp"),
     PRODUCTION_ORDER_FORM("", "/WEB-INF/view/production-order/form.jsp")
     ;

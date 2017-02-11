@@ -6,17 +6,26 @@
 package br.com.estacio.verifyid.controller;
 
 import br.com.estacio.verifyid.model.actions.AddCustomerAction;
+import br.com.estacio.verifyid.model.actions.AddOrderAction;
 import br.com.estacio.verifyid.model.actions.BaseAction;
 import br.com.estacio.verifyid.model.actions.DeleteCustomerAction;
+import br.com.estacio.verifyid.model.actions.DeleteOrderAction;
 import br.com.estacio.verifyid.model.actions.EditCustomerAction;
+import br.com.estacio.verifyid.model.actions.EditOrderAction;
 import br.com.estacio.verifyid.model.actions.HomeAction;
 import br.com.estacio.verifyid.model.actions.ListCustomersAction;
+import br.com.estacio.verifyid.model.actions.ListOrdersAction;
 import br.com.estacio.verifyid.model.actions.LoginAction;
+import br.com.estacio.verifyid.model.actions.NewCustomerAction;
+import br.com.estacio.verifyid.model.actions.NewOrderAction;
 import br.com.estacio.verifyid.model.actions.UpdateCustomerAction;
+import br.com.estacio.verifyid.model.actions.UpdateOrderAction;
 import br.com.estacio.verifyid.model.dao.CustomerDAO;
+import br.com.estacio.verifyid.model.dao.OrderDAO;
 import br.com.estacio.verifyid.model.dao.UserDAO;
 import br.com.estacio.verifyid.model.enums.ActionEnum;
 import br.com.estacio.verifyid.model.service.CustomerService;
+import br.com.estacio.verifyid.model.service.OrderService;
 import br.com.estacio.verifyid.model.service.UserService;
 import java.io.IOException;
 import java.util.HashMap;
@@ -45,6 +54,13 @@ public abstract class BaseController extends HttpServlet {
             actions.put(ActionEnum.EDIT_CUSTOMER.getPath(), new EditCustomerAction((new CustomerService(new CustomerDAO()))));
             actions.put(ActionEnum.LIST_CUSTOMERS.getPath(), new ListCustomersAction((new CustomerService(new CustomerDAO()))));
             actions.put(ActionEnum.UPDATE_CUSTOMER.getPath(), new UpdateCustomerAction((new CustomerService(new CustomerDAO()))));
+            actions.put(ActionEnum.NEW_CUSTOMER.getPath(), new NewCustomerAction((new CustomerService(new CustomerDAO()))));
+            actions.put(ActionEnum.ADD_ORDER.getPath(), new AddOrderAction(new OrderService(new OrderDAO())));
+            actions.put(ActionEnum.DELETE_ORDER.getPath(), new DeleteOrderAction((new OrderService(new OrderDAO()))));
+            actions.put(ActionEnum.EDIT_ORDER.getPath(), new EditOrderAction((new OrderService(new OrderDAO()))));
+            actions.put(ActionEnum.LIST_ORDERS.getPath(), new ListOrdersAction((new OrderService(new OrderDAO()))));
+            actions.put(ActionEnum.UPDATE_ORDER.getPath(), new UpdateOrderAction((new OrderService(new OrderDAO()))));
+            actions.put(ActionEnum.NEW_ORDER.getPath(), new NewOrderAction((new OrderService(new OrderDAO()))));
         }
         return actions;
     }

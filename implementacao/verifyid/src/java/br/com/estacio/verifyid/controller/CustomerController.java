@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author rafaelpevidor
  */
-@WebServlet(name = "CustomerController", urlPatterns = {"/customer", "/customer/add", "/customer/edit", "/customer/remove", "/customer/update"})
+//@WebServlet(name = "CustomerController", urlPatterns = {"/customer", "/customer/add", "/customer/edit", "/customer/remove", "/customer/update", "/customer/new"})
 public class CustomerController extends BaseController {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -34,15 +34,16 @@ public class CustomerController extends BaseController {
         String userPath = request.getServletPath();
         ActionEnum actionToExecute = ActionEnum.findByPath(userPath);
         
-        if (!(
-                (actionToExecute.equals(ActionEnum.EDIT_CUSTOMER))||
-                (actionToExecute.equals(ActionEnum.LIST_CUSTOMERS))
-        )) {
+        if (
+                (actionToExecute.equals(ActionEnum.ADD_CUSTOMER))||
+                (actionToExecute.equals(ActionEnum.UPDATE_CUSTOMER))
+        ) {
             throw new ServletException("Ação inválida!");
         }
         
         try {
             String page = getAction(userPath).processRequest(request, response);
+            System.out.println(page);
             forward(page, request, response);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -63,9 +64,9 @@ public class CustomerController extends BaseController {
        String userPath = request.getServletPath();
        ActionEnum actionToExecute = ActionEnum.findByPath(userPath);
        
-       if (
-                (actionToExecute.equals(ActionEnum.EDIT_CUSTOMER))||
-                (actionToExecute.equals(ActionEnum.LIST_CUSTOMERS))
+       if (!
+                (actionToExecute.equals(ActionEnum.ADD_CUSTOMER))||
+                (actionToExecute.equals(ActionEnum.UPDATE_CUSTOMER))
         ) {
             throw new ServletException("Ação inválida!");
         }

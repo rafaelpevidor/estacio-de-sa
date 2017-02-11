@@ -48,5 +48,10 @@ public class ProductionOrderDAO implements BaseDAO<ProductionOrder> {
         out.addAll(records.values());
         return out;
     }
+  
+    @Override
+    public ProductionOrder get(Integer entidadeId) {
+       return records.get(entidadeId);
+    }
     
 }
