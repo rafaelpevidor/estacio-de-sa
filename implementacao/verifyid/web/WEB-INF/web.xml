@@ -4,29 +4,15 @@
     <!-- Servlet-URL Mappings -->
 
     <servlet-mapping>
-        <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order</url-pattern>
+        <servlet-name>MyController</servlet-name>
+        <url-pattern>/oops/*</url-pattern>
     </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order/add</url-pattern>
+        <url-pattern>/order/*</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order/edit</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order/remove</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order/update</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OrderController</servlet-name>
-        <url-pattern>/order/new</url-pattern>
-    </servlet-mapping>
+
     <servlet-mapping>
         <servlet-name>CustomerController</servlet-name>
         <url-pattern>/customer</url-pattern>
@@ -77,6 +63,10 @@
     <servlet>
         <servlet-name>OrderController</servlet-name>
         <servlet-class>br.com.estacio.verifyid.controller.OrderController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>MyController</servlet-name>
+        <servlet-class>br.com.estacio.verifyid.controller.MyController</servlet-class>
     </servlet>
 
     <!-- Session Configuration -->
